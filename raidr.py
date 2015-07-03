@@ -46,7 +46,7 @@ if (args['reblogs'] == 'false'):
     save_dir = 'rips/' + folder + '/'
 
 # current version, and authors
-current_ver = '1.1.7'
+current_ver = '1.1.8'
 authors = 'Aphects & DannyVoid'
 
 # flavor text

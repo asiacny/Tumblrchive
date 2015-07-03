@@ -1,4 +1,4 @@
-# tRaidr 1.1.7
+# tRaidr 1.1.8
 a python script to download all images from any tumblr.
 
 <h3>Authors:</h3>
@@ -20,7 +20,7 @@ Aphects & DannyVoid
 <h3>Output:</h3>
 <pre><code>$ python tRaidr.py -u tumblrusername -r false
 
-tRaidr 1.1.7
+tRaidr 1.1.8
 Authored By Aphects & DannyVoid
 -------------------------------
 Looking up tumblrusername...
