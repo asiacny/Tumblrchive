@@ -1,4 +1,4 @@
-# tumblRaider 1.1.8
+# TumblRaider 1.1.8
 a python script to download all images from any tumblr.
 
 <h3>Authors:</h3>
@@ -8,7 +8,7 @@ Aphects & DannyVoid
 <code>os re sys json time urllib urllib2 urlparse argparse datetime</code>
 
 <h3>Usage:</h3>
-<pre>usage: tumblRaider.py [-h] -u tumblrusername [-r true/false] [-f foldertosavecontent] [-d 20]</pre>
+<pre>usage: TumblRaider.py [-h] -u tumblrusername [-r true/false] [-f foldertosavecontent] [-d 20]</pre>
 
 <h3>Usage Arguments Explained:</h3>
 <pre> -u tumblrUsernameHere [i.e. -u pybackup] [the tumblr username, excluding .tumblr.com]</pre>
@@ -18,9 +18,9 @@ Aphects & DannyVoid
 <pre> -d integer [optional] [amount of duplicates found before you stop checking for new images]</pre>
 
 <h3>Output:</h3>
-<pre><code>$ python tumblRaider.py -u tumblrusername -r false
+<pre><code>$ python TumblRaider.py -u tumblrusername -r false
 
-tumblRaider 1.1.8
+TumblRaider 1.1.8
 Authored By Aphects & DannyVoid
 -------------------------------
 Looking up tumblrusername...

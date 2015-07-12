@@ -13,7 +13,7 @@ import datetime
 start_time = time.time()
 
 # passing some arguments
-parser = argparse.ArgumentParser('tumblRaider')
+parser = argparse.ArgumentParser('TumblRaider')
 parser.add_argument('-u', '--username', help='Tumblr Username')
 parser.add_argument('-r', '--reblogs', help='True enables the download of reblogged images. False just downloads unique, non-reblogged content.')
 parser.add_argument('-f', '--folder', help='Folder to store images.')
@@ -24,7 +24,7 @@ if not args['reblogs']:
     args['reblogs'] = 'false'
 
 # grabbing the api key
-api_ext = urllib.urlopen("http://t.tumblRaider.us/api").read()
+api_ext = urllib.urlopen("http://t.TumblRaider.us/api").read()
 grab_api = re.findall(r"\b\w{50}\b", api_ext)
 api_key = grab_api[0]
 
@@ -50,7 +50,7 @@ current_ver = '1.1.8'
 authors = 'Aphects & DannyVoid'
 
 # flavor text
-print '\ntumblRaider ' + current_ver
+print '\nTumblRaider ' + current_ver
 print 'Authored By ' + authors
 print '-------------------------------'
 print 'Looking up ' + host_name + '...'
@@ -137,7 +137,7 @@ except Exception:
     pass
 
 # create a log
-log = open('rips/tumblRaider_log.txt', 'a')
+log = open('rips/TumblRaider_log.txt', 'a')
 logging = str(datetime.datetime.now()) + ' | ' + str(host_name) + '.tumblr.com' + ' | ' + str(new_image) + ' images saved' + ' | ' + str(image_exists) + ' images skipped' + ' | ' + 'process took %f seconds' % (time.time() - start_time)
 print >> log, (logging)
 log.close()
