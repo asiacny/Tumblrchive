@@ -1,4 +1,4 @@
-# TumblRaider 1.1.8
+# TumblRaider 1.1.9
 a python script to download all images from any tumblr.
 
 <h3>Authors:</h3>
@@ -20,7 +20,7 @@ Aphects & DannyVoid
 <h3>Output:</h3>
 <pre><code>$ python TumblRaider.py -u tumblrusername -r false
 
-TumblRaider 1.1.8
+TumblRaider 1.1.9
 Authored By Aphects & DannyVoid
 -------------------------------
 Looking up tumblrusername...

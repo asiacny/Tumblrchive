@@ -15,7 +15,7 @@ start_time = time.time()
 # passing some arguments
 parser = argparse.ArgumentParser('TumblRaider')
 parser.add_argument('-u', '--username', help='Tumblr Username')
-parser.add_argument('-r', '--reblogs', help='True enables the download of reblogged images. False just downloads unique, non-reblogged content.')
+parser.add_argument('-r', '--reblogs', choices=['true', 'false'], help='True enables the download of reblogged images. False just downloads unique, non-reblogged content.')
 parser.add_argument('-f', '--folder', help='Folder to store images.')
 parser.add_argument('-d', '--duplicates', help='Number of duplicates to allow before scrape ends.')
 args = vars(parser.parse_args())
@@ -46,7 +46,7 @@ if (args['reblogs'] == 'false'):
     save_dir = 'rips/' + folder + '/'
 
 # current version, and authors
-current_ver = '1.1.8'
+current_ver = '1.1.9'
 authors = 'Aphects & DannyVoid'
 
 # flavor text
