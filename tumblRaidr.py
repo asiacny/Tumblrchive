@@ -46,7 +46,7 @@ if (args['reblogs'] == 'false'):
     save_dir = 'rips/' + folder + '/'
 
 # current version, and authors
-current_ver = '2.0.1'
+current_ver = '2.0.2'
 authors = 'Aphects & DannyVoid'
 
 # flavor text
@@ -112,8 +112,8 @@ try:
                             urllib.urlretrieve(pictureUrl, photoName)
                             new_image += 1;
                             if (new_image == 1):
-                                print 'Found new images...'
-                                print 'Downloading images...'
+                                print 'Found new content...'
+                                print 'Downloading content...'
                         else:
                             image_exists += 1;
                 if ('video_url' in post):
@@ -123,9 +123,6 @@ try:
                     if not os.path.isfile(photoName):
                         urllib.urlretrieve(pictureUrl, photoName)
                         new_video += 1;
-                        if (new_video == 1):
-                            print 'Found new videos...'
-                            print 'Downloading videos...'
                     else:
                         video_exists += 1;
             if (args['reblogs'] == 'false'):
@@ -139,8 +136,8 @@ try:
                             urllib.urlretrieve(pictureUrl, photoName)
                             new_image += 1;
                             if (new_image == 1):
-                                print 'Found new images...'
-                                print 'Downloading images...'
+                                print 'Found new content...'
+                                print 'Downloading content...'
                         else:
                             image_exists += 1;
                 if ('video_url' in post):
@@ -150,15 +147,12 @@ try:
                     if not os.path.isfile(photoName):
                         urllib.urlretrieve(pictureUrl, photoName)
                         new_video += 1;
-                        if (new_video == 1):
-                            print 'Found new videos...'
-                            print 'Downloading videos...'
                     else:
                         video_exists += 1;
         if (image_exists > duplicates_allowed) and (image_exists < duplicates_allowed + 5):
-            print 'Checking for new images...'
+            print 'Checking for new content...'
         if (image_exists >= duplicates_allowed + 5):
-            print 'No new images found...'
+            print 'No new content found...'
             break
 except Exception: 
     pass
