@@ -46,7 +46,7 @@ if (args['reblogs'] == 'false'):
     save_dir = 'rips/' + folder + '/'
 
 # current version, and authors
-current_ver = '1.1.9'
+current_ver = '2.0.1'
 authors = 'Aphects & DannyVoid'
 
 # flavor text
@@ -81,15 +81,18 @@ totalPosts = jsonResponse.get('response', {}).get('total_posts')
 print 'User found...'
 print 'Looking through ' + str(totalPosts) + ' total posts...'
 
-# duplicate and new image checking
+# duplicate and new file checking
 image_exists = 0
 new_image = 0
+new_video = 0
+video_exists = 0
+
 if not args['duplicates']:
     duplicates_allowed = 20
 else:
     duplicates_allowed = int(args['duplicates'])
 
-# download all images
+# download all content
 try:
     while (not (offset >= totalPosts + 20)):
         url = "http://api.tumblr.com/v2/blog/{host}.tumblr.com/posts?api_key={key}&reblog_info=true&offset={offset}".format(
@@ -113,6 +116,18 @@ try:
                                 print 'Downloading images...'
                         else:
                             image_exists += 1;
+                if ('video_url' in post):
+                    pictureUrl = post['video_url']
+                    split = urlparse.urlsplit(pictureUrl)
+                    photoName = save_dir + split.path.split("/")[-1]
+                    if not os.path.isfile(photoName):
+                        urllib.urlretrieve(pictureUrl, photoName)
+                        new_video += 1;
+                        if (new_video == 1):
+                            print 'Found new videos...'
+                            print 'Downloading videos...'
+                    else:
+                        video_exists += 1;
             if (args['reblogs'] == 'false'):
                 if ('reblogged_from_id' not in post):
                     photos = post.get('photos', {})
@@ -128,6 +143,18 @@ try:
                                 print 'Downloading images...'
                         else:
                             image_exists += 1;
+                if ('video_url' in post):
+                    pictureUrl = post['video_url']
+                    split = urlparse.urlsplit(pictureUrl)
+                    photoName = save_dir + split.path.split("/")[-1]
+                    if not os.path.isfile(photoName):
+                        urllib.urlretrieve(pictureUrl, photoName)
+                        new_video += 1;
+                        if (new_video == 1):
+                            print 'Found new videos...'
+                            print 'Downloading videos...'
+                    else:
+                        video_exists += 1;
         if (image_exists > duplicates_allowed) and (image_exists < duplicates_allowed + 5):
             print 'Checking for new images...'
         if (image_exists >= duplicates_allowed + 5):
@@ -138,7 +165,9 @@ except Exception:
 
 # create a log
 log = open('rips/TumblRaider_log.txt', 'a')
-logging = str(datetime.datetime.now()) + ' | ' + str(host_name) + '.tumblr.com' + ' | ' + str(new_image) + ' images saved' + ' | ' + str(image_exists) + ' images skipped' + ' | ' + 'process took %f seconds' % (time.time() - start_time)
+filesSaved = new_image + new_video
+filesSkipped = image_exists + video_exists
+logging = str(datetime.datetime.now()) + ' | ' + str(host_name) + '.tumblr.com' + ' | ' + str(filesSaved) + ' files saved' + ' | ' + str(filesSkipped) + ' files skipped' + ' | ' + 'process took %f seconds' % (time.time() - start_time)
 print >> log, (logging)
 log.close()
     
