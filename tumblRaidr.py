@@ -15,14 +15,10 @@ def queryApi(url):
     return json.loads(req.read())
 	
 def flavorText():
-    print '\nTumblRaider ' + '2.1.5'
+    print '\nTumblRaider ' + '2.1.6'
     print 'Authored By ' + 'Danny Void & Aphects'
     print '-------------------------------'
     print 'Looking up ' + host_name + '...'
-	
-def userFound():
-    print 'User found...'
-    print 'Looking through ' + str(totalPosts) + ' total posts...'
 
 # time script started
 start_time = time.time()
@@ -92,8 +88,10 @@ else:
     shutdown = 0
     jsonResponse = queryApi(url)
     totalPosts = jsonResponse.get('response', {}).get('total_posts')
-    userFound()
+    print 'User found...'
+    print 'Looking through ' + str(totalPosts) + ' total posts...'
 
+# create directory if username is valid
 if (shutdown != 1):
     if not os.path.exists(os.path.dirname(save_dir)):
         os.makedirs(os.path.dirname(save_dir))
