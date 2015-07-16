@@ -13,6 +13,16 @@ import datetime
 def queryApi(url):
     req = urllib2.urlopen(url)
     return json.loads(req.read())
+	
+def flavorText():
+    print '\nTumblRaider ' + '2.1.5'
+    print 'Authored By ' + 'Danny Void & Aphects'
+    print '-------------------------------'
+    print 'Looking up ' + host_name + '...'
+	
+def userFound():
+    print 'User found...'
+    print 'Looking through ' + str(totalPosts) + ' total posts...'
 
 # time script started
 start_time = time.time()
@@ -20,7 +30,8 @@ start_time = time.time()
 # passing some arguments
 parser = argparse.ArgumentParser('TumblRaider')
 parser.add_argument('-u', '--username', help='Tumblr Username')
-parser.add_argument('-r', '--reblogs', choices=['true', 'false'], help='True enables the download of reblogged images. False just downloads unique, non-reblogged content.')
+parser.add_argument('-r', '--reblogs', choices=['true', 'false'], help='Download reblogged content.')
+parser.add_argument('-q', '--rehash', choices=['true', 'false'], help='Redownload all content, skipping duplication checks.')
 parser.add_argument('-f', '--folder', help='Folder to store images.')
 parser.add_argument('-d', '--duplicates', help='Number of duplicates to allow before scrape ends.')
 args = vars(parser.parse_args())
@@ -29,6 +40,11 @@ args = vars(parser.parse_args())
 # argument defaults to false
 if not args['reblogs']:
     args['reblogs'] = 'false'
+	
+# if rehash argument is not passed
+# argument defaults to false
+if not args['rehash']:
+    args['rehash'] = 'false'
 
 # grabbing the api key
 api_ext = urllib.urlopen("http://t.raidr.us/api").read()
@@ -59,27 +75,28 @@ if (args['reblogs'] == 'true'):
 if (args['reblogs'] == 'false'):
     save_dir = 'rips/' + folder + '/'
 
-# create directory if it doesn't exist
-if not os.path.exists(os.path.dirname(save_dir)):
-    os.makedirs(os.path.dirname(save_dir))
-
-# current version and authors
-current_ver = '2.1.1'
-authors = 'Danny Void & Aphects'
-
 # flavor text
-print '\nTumblRaider ' + current_ver
-print 'Authored By ' + authors
-print '-------------------------------'
-print 'Looking up ' + host_name + '...'
+flavorText()
 
-# shows users total posts
+# check if user exists and output
 url = "http://api.tumblr.com/v2/blog/{host}.tumblr.com/posts?api_key={key}&reblog_info=true".format(host=host_name, key=api_key)
-jsonResponse = queryApi(url)
-totalPosts = jsonResponse.get('response', {}).get('total_posts')
+try:
+    urllib2.urlopen(url)
+except urllib2.HTTPError, err:
+    if err.code == 404:
+        shutdown = 1
+        print 'User not found...'
+        print 'Exiting TumblRaider...'
+        print '-------------------------------'
+else:
+    shutdown = 0
+    jsonResponse = queryApi(url)
+    totalPosts = jsonResponse.get('response', {}).get('total_posts')
+    userFound()
 
-print 'User found...'
-print 'Looking through ' + str(totalPosts) + ' total posts...'
+if (shutdown != 1):
+    if not os.path.exists(os.path.dirname(save_dir)):
+        os.makedirs(os.path.dirname(save_dir))
 
 # default values for error checking and logging
 new_image = 0
@@ -156,22 +173,28 @@ try:
                             new_video += 1;
                         else:
                             video_exists += 1;
-        if (image_exists > duplicates_allowed) and (image_exists < duplicates_allowed + 5):
-            print 'Checking for new content...'
-        if (image_exists >= duplicates_allowed + 5):
-            print 'No new content found...'
-            break
+        if (args['rehash'] == 'false'):
+            if (image_exists > duplicates_allowed) and (image_exists < duplicates_allowed + 5):
+                print 'Checking for new content...'
+            if (image_exists >= duplicates_allowed + 5):
+                print 'No new content found...'
+                break
+        else:
+            pass
+        
 except Exception: 
     pass
 
 # create a log
-log = open('rips/TumblRaider_log.txt', 'a')
-filesSaved = new_image + new_video
-filesSkipped = image_exists + video_exists
-logging = str(datetime.datetime.now()) + ' | ' + str(host_name) + '.tumblr.com' + ' - ' + str(filesSaved) + ' files saved' + ' - ' + str(filesSkipped) + ' files skipped' + ' - ' + 'process took %f seconds' % (time.time() - start_time)
-print >> log, (logging)
-log.close()
+if (shutdown != 1):
+    log = open('rips/TumblRaider_log.txt', 'a')
+    filesSaved = new_image + new_video
+    filesSkipped = image_exists + video_exists
+    logging = str(datetime.datetime.now()) + ' | ' + str(host_name) + '.tumblr.com' + ' - ' + str(filesSaved) + ' files saved' + ' - ' + str(filesSkipped) + ' files skipped' + ' - ' + 'process took %f seconds' % (time.time() - start_time)
+    print >> log, (logging)
+    log.close()
     
 # all done
-print 'All done.'
-print '-------------------------------'
+if (shutdown != 1):
+    print 'All done.'
+    print '-------------------------------'
