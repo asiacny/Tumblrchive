@@ -1,8 +1,8 @@
-# TumblRaider 2.0.2
+# TumblRaider 2.1.1
 a python script to download all images & videos from any tumblr.
 
 <h3>Authors:</h3>
-Aphects & DannyVoid
+Danny Void & Aphects
 
 <h3>Imports:</h3>
 <code>os re sys json time urllib urllib2 urlparse argparse datetime</code>
@@ -19,8 +19,8 @@ Aphects & DannyVoid
 <h3>Output:</h3>
 <pre><code>$ python TumblRaider.py -u tumblrusername
 
-TumblRaider 2.0.2
-Authored By Aphects & DannyVoid
+TumblRaider 2.1.1
+Authored By Danny Void & Aphects
 -------------------------------
 Looking up tumblrusername...
 User found...
