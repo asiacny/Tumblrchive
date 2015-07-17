@@ -18,7 +18,7 @@ def queryApi(url):
     return json.loads(req.read())
 	
 def flavorText():
-    print '\nTumblRaider ' + '2.1.7'
+    print '\nTumblRaider ' + '2.1.8'
     print 'Authored By ' + 'Danny Void & Aphects'
     print '-------------------------------'
     print 'Looking up ' + host_name + '...'
@@ -172,6 +172,9 @@ try:
                         else:
                             video_exists += 1;
         if (args['rehash'] == 'false'):
+            if (new_image == 0 and new_video == 0):
+                print 'No new content found...    \r',
+                sys.stdout.flush()
             if (image_exists > duplicates_allowed) and (image_exists < duplicates_allowed + 5):
                 print 'Checking for new content...\r',
                 sys.stdout.flush()
