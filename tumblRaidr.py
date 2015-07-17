@@ -9,19 +9,19 @@ import urlparse
 import argparse
 import datetime
 
+# time script started
+start_time = time.time()
+
 # define the Json Api response from tumblr
 def queryApi(url):
     req = urllib2.urlopen(url)
     return json.loads(req.read())
 	
 def flavorText():
-    print '\nTumblRaider ' + '2.1.6'
+    print '\nTumblRaider ' + '2.1.7'
     print 'Authored By ' + 'Danny Void & Aphects'
     print '-------------------------------'
     print 'Looking up ' + host_name + '...'
-
-# time script started
-start_time = time.time()
 
 # passing some arguments
 parser = argparse.ArgumentParser('TumblRaider')
@@ -173,13 +173,13 @@ try:
                             video_exists += 1;
         if (args['rehash'] == 'false'):
             if (image_exists > duplicates_allowed) and (image_exists < duplicates_allowed + 5):
-                print 'Checking for new content...'
+                print 'Checking for new content...\r',
+                sys.stdout.flush()
             if (image_exists >= duplicates_allowed + 5):
-                print 'No new content found...'
+                print 'No new content found...    '
                 break
         else:
             pass
-        
 except Exception: 
     pass
 

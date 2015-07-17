@@ -1,4 +1,4 @@
-# TumblRaider 2.1.6
+# TumblRaider 2.1.7
 a python script to download all images & videos from any tumblr.
 
 <h3>Authors:</h3>
@@ -19,7 +19,7 @@ Danny Void & Aphects
 <h3>Output:</h3>
 <pre><code>$ python TumblRaider.py -u tumblrusername
 
-TumblRaider 2.1.6
+TumblRaider 2.1.7
 Authored By Danny Void & Aphects
 -------------------------------
 Looking up tumblrusername...
