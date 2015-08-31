@@ -43,9 +43,10 @@ if not args['rehash']:
     args['rehash'] = 'false'
 
 # grabbing the api key
-api_ext = urllib.urlopen("http://t.raidr.us/api").read()
-grab_api = re.findall(r"\b\w{50}\b", api_ext)
-api_key = grab_api[0]
+#api_ext = urllib.urlopen("http://t.raidr.us/api").read()
+#grab_api = re.findall(r"\b\w{50}\b", api_ext)
+#api_key = grab_api[0]
+api_key = "v5kUqGQXUtmF7K0itri1DGtgTs0VQpbSEbh1jxYgj9d2Sq18F8"
 
 # user to download content from
 # if username argument is not passed
