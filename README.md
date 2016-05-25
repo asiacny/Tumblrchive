@@ -34,5 +34,5 @@ All done.
 
 <h3>Where are the pictures?</h3>
 All images are stored inside a newly created directory.<br />
-<code>rips/tumblrusername/</code> if -r false<br />
-<code>rips/tumblrusername/reblogs/</code> if -r true
+<code>rips/tumblrusername/Tumblr/</code> if -r false<br />
+<code>rips/tumblrusername/Tumblr/reblogs/</code> if -r true
