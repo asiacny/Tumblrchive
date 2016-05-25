@@ -20,7 +20,6 @@ Danny Void
 <pre><code>$ python TumblRaider.py -u tumblrusername
 
 Tumblrchive 3.0.0
-Authored By Danny Void
 -------------------------------
 Looking up tumblrusername...
 User found...
