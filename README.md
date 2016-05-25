@@ -1,14 +1,14 @@
-# TumblRaider 2.1.8
+# Tumblrchive 3.0.0
 a python script to download all images & videos from any tumblr.
 
 <h3>Authors:</h3>
-Danny Void & Aphects
+Danny Void
 
 <h3>Imports:</h3>
 <code>os re sys json time urllib urllib2 urlparse argparse datetime</code>
 
 <h3>Usage:</h3>
-<pre>usage: TumblRaider.py [-h] -u tumblrusername [-r true/false] [-f foldertosavecontent] [-d 20]</pre>
+<pre>usage: Tumblrchive.py [-h] -u tumblrusername [-r true/false] [-f foldertosavecontent] [-d 20]</pre>
 
 <h3>Usage Arguments Explained:</h3>
 <pre> -u tumblrUsernameHere [i.e. -u pybackup] [the tumblr username, excluding .tumblr.com]</pre>
@@ -19,14 +19,15 @@ Danny Void & Aphects
 <h3>Output:</h3>
 <pre><code>$ python TumblRaider.py -u tumblrusername
 
-TumblRaider 2.1.8
-Authored By Danny Void & Aphects
+Tumblrchive 3.0.0
+Authored By Danny Void
 -------------------------------
 Looking up tumblrusername...
 User found...
 Looking through x total posts...
 Found new content...
 Downloading new content...
+
 All done.
 -------------------------------
 </code></pre>
