@@ -18,8 +18,7 @@ def queryApi(url):
     return json.loads(req.read())
 	
 def flavorText():
-    print '\nTumblRaider ' + '2.1.8'
-    print 'Authored By ' + 'Danny Void & Aphects'
+    print '\nTumblrchive ' + '3.0.0'
     print '-------------------------------'
     print 'Looking up ' + host_name + '...'
 
@@ -43,18 +42,10 @@ if not args['rehash']:
     args['rehash'] = 'false'
 
 # grabbing the api key
-#api_ext = urllib.urlopen("http://t.raidr.us/api").read()
-#grab_api = re.findall(r"\b\w{50}\b", api_ext)
-#api_key = grab_api[0]
 api_key = "v5kUqGQXUtmF7K0itri1DGtgTs0VQpbSEbh1jxYgj9d2Sq18F8"
 
 # user to download content from
-# if username argument is not passed
-# username must be entered via raw_input
-if not args['username']:
-    host_name = raw_input('Tumblr to scrape: ')
-else:
-    host_name = args['username']
+host_name = args['username']
 
 # location to store images
 # if folder argument is not passed
@@ -68,9 +59,9 @@ else:
 # content will be saved inside "reblogs" subfolder
 # otherwise all content will be saved inside main folder
 if (args['reblogs'] == 'true'):
-    save_dir = 'rips/' + folder + '/reblogs/'
+    save_dir = 'rips/' + folder + '/Tumblr/reblogs/'
 if (args['reblogs'] == 'false'):
-    save_dir = 'rips/' + folder + '/'
+    save_dir = 'rips/' + folder + '/Tumblr/'
 
 # flavor text
 flavorText()
@@ -83,7 +74,7 @@ except urllib2.HTTPError, err:
     if err.code == 404:
         shutdown = 1
         print 'User not found...'
-        print 'Exiting TumblRaider...'
+        print 'Exiting Tumblrchive...'
         print '-------------------------------'
 else:
     shutdown = 0
@@ -135,8 +126,8 @@ try:
                             urllib.urlretrieve(pictureUrl, photoName)
                             new_image += 1;
                             if (new_image == 1):
-                                print 'Found new content...'
-                                print 'Downloading content...'
+                                print 'Found new content...          '
+                                print 'Downloading content...          '
                         else:
                             image_exists += 1;
                     if ('video_url' in post):
@@ -159,8 +150,8 @@ try:
                             urllib.urlretrieve(pictureUrl, photoName)
                             new_image += 1;
                             if (new_image == 1):
-                                print 'Found new content...'
-                                print 'Downloading content...'
+                                print 'Found new content...          '
+                                print 'Downloading content...          '
                         else:
                             image_exists += 1;
                     if ('video_url' in post):
@@ -174,13 +165,13 @@ try:
                             video_exists += 1;
         if (args['rehash'] == 'false'):
             if (new_image == 0 and new_video == 0):
-                print 'No new content found...    \r',
+                print 'No new content found...                                                  \r',
                 sys.stdout.flush()
             if (image_exists > duplicates_allowed) and (image_exists < duplicates_allowed + 5):
-                print 'Checking for new content...\r',
+                print 'Checking for new content...                                                  \r',
                 sys.stdout.flush()
             if (image_exists >= duplicates_allowed + 5):
-                print 'No new content found...    '
+                print 'No new content found...                                                  \r'
                 break
         else:
             pass
@@ -189,7 +180,7 @@ except Exception:
 
 # create a log
 if (shutdown != 1):
-    log = open('rips/TumblRaider_log.txt', 'a')
+    log = open('rips/tumblr_log.txt', 'a')
     filesSaved = new_image + new_video
     filesSkipped = image_exists + video_exists
     logging = str(datetime.datetime.now()) + ' | ' + str(host_name) + '.tumblr.com' + ' - ' + str(filesSaved) + ' files saved' + ' - ' + str(filesSkipped) + ' files skipped' + ' - ' + 'process took %f seconds' % (time.time() - start_time)
@@ -198,5 +189,9 @@ if (shutdown != 1):
     
 # all done
 if (shutdown != 1):
-    print 'All done.'
-    print '-------------------------------'
+    if (new_image == 0 and new_video == 0):
+        print '\nAll done.      '
+        print '-------------------------------'
+    else:
+        print 'All done.'
+        print '-------------------------------'
